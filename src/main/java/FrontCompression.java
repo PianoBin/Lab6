@@ -44,8 +44,14 @@ public class FrontCompression {
         /*
          * Complete this function.
          */
+        String[] corpusList = corpus.split("\n");
+        String output = "" + 0 + " " + corpusList[0];
+        for (int count = 0; count < corpusList.length - 1; count++) {
+            int prefix = longestPrefix(corpusList[count], corpusList[count + 1]);
+            output += "\n" + prefix + " " + corpusList[count + 1].substring(prefix);
+        }
 
-        return "";
+        return output;
     }
 
     /**
@@ -68,7 +74,22 @@ public class FrontCompression {
          * Complete this function.
          */
 
-        return "";
+        String[] corpusList = corpus.split("\n");
+        String output = corpusList[0].substring(2, corpusList[0].length());
+        String nextWord = output;
+        for (int count = 0; count < corpusList.length - 1; count++) {
+            System.out.println(nextWord);
+            System.out.println(corpusList[count + 1]);
+            String prefix = nextWord.substring(0, Integer.parseInt(corpusList[count + 1]
+                    .substring(0, 1)));
+            System.out.println("PREFIX " + prefix);
+            nextWord = prefix + corpusList[count + 1].substring(2, corpusList[count + 1]
+                    .length());
+            output += "\n" + prefix + corpusList[count + 1].substring(2, corpusList[count + 1]
+                    .length());
+        }
+
+        return output;
     }
 
     /**
@@ -82,7 +103,21 @@ public class FrontCompression {
         /*
          * Complete this function.
          */
-        return 0;
+        int prefixCount = 0;
+        int smallLength = 0;
+        if (firstString.length() < secondString.length()) {
+            smallLength = firstString.length();
+        } else {
+            smallLength = secondString.length();
+        }
+
+        for (int count = 0; count < smallLength - 1; count++) {
+            if (firstString.charAt(count) == secondString.charAt(count)) {
+                prefixCount++;
+            }
+        }
+
+        return prefixCount;
     }
 
     /**
